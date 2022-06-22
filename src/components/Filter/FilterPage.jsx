@@ -1,47 +1,46 @@
 import { useState } from "react";
 
-const FilterPage = ({ pages }) => {
-    const numPages = [...Array(pages).keys()];
-    const onClickHandler = ({ target }) => {
-
-    }
-
+const FilterPage = ({ totalPages, currentPage, setCurrentPage }) => {
+    const numPages = [...Array(totalPages).keys()];
+    
     return <>
         <input 
             type="button"
             name="<<"
             value="<<"
-            onClick={onClickHandler}
+            onClick={ ()=>setCurrentPage(0) }
+            disabled = {currentPage<=0}
         />
          <input 
             type="button"
             name="<"
             value="<"
-            onClick={onClickHandler}
+            onClick={()=>setCurrentPage(currentPage-1)}
+            disabled = {currentPage<=0}
         />
         { numPages.map(page => 
             <input 
                 key={page}
                 type="button"
                 name={page}
-                value={page}
-                onClick={onClickHandler}
+                value={page+1}
+                onClick={({target})=>setCurrentPage(target.value-1)}
             />) }
         <input 
             type="button"
             name=">"
             value=">"
-            onClick={onClickHandler}
+            onClick={ ()=>setCurrentPage(currentPage + 1) }
+            disabled = {currentPage >= numPages.length -1}
         />
         <input 
             type="button"
             name=">>"
             value=">>"
-            onClick={onClickHandler}
+            onClick={ ()=>setCurrentPage(numPages.length-1) }
+            disabled = {currentPage >= numPages.length -1}
         />
     </>
 }
-
-
 
 export default FilterPage;
