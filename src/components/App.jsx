@@ -7,8 +7,10 @@ import FilterTypes from "./Filter/FilterTypes"
 import FilterSearch from "./Filter/FilterSearch"
 import pokemons from "/public/data/pokemons.json"
 import FilterPage from "./Filter/FilterPage";
+//import { usePokemons } from "./hooks/usePokemons";
 
 const App = () => {
+    //const pokemons1 = usePokemons();
     const [pokemonTypes, setPokemonTypes] = usePokemonTypes (
       [
         {"type": "Eléctrico", "isChecked": true},
@@ -31,7 +33,7 @@ const App = () => {
         {"type": "Agua", "isChecked": true}
       ]
     )
-    let pokemonsList = pokemons.filter((pokemon) => {
+    let pokemonsList = pokemons && pokemons.filter((pokemon) => {
       const pokemonTypesChecked = pokemonTypes.filter(pokemonType => pokemonType.isChecked).map(pokemonType => pokemonType.type)
       return pokemon.types.some((type) => pokemonTypesChecked.includes(type))
     });
