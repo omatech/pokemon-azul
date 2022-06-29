@@ -10,7 +10,7 @@ import FilterPage from "./Filter/FilterPage";
 import { usePokemons } from "./hooks/usePokemons";
 
 const App = () => {
-    const pokemons1 = usePokemons();
+    const [isLoading, pokemons] = usePokemons();
     const [pokemonTypes, setPokemonTypes] = usePokemonTypes (
       [
         {"type": "Eléctrico", "isChecked": true},
@@ -33,21 +33,22 @@ const App = () => {
         {"type": "Agua", "isChecked": true}
       ]
     )
-    let pokemonsList = pokemons && pokemons.filter((pokemon) => {
-      const pokemonTypesChecked = pokemonTypes.filter(pokemonType => pokemonType.isChecked).map(pokemonType => pokemonType.type)
-      return pokemon.types.some((type) => pokemonTypesChecked.includes(type))
-    });
-    const [filteredPokemons, setSearch] = usePokemonNames(pokemonsList);
+    // let pokemonsList = pokemons && pokemons.filter((pokemon) => {
+    //   const pokemonTypesChecked = pokemonTypes.filter(pokemonType => pokemonType.isChecked).map(pokemonType => pokemonType.type)
+    //   return pokemon.types.some((type) => pokemonTypesChecked.includes(type))
+    // });
+    // const [filteredPokemons, setSearch] = usePokemonNames(pokemonsList);
 
-    const [paginatedPokemons, totalPages, currentPage, setCurrentPage] = usePokemonPagination(filteredPokemons)
+    // const [paginatedPokemons, totalPages, currentPage, setCurrentPage] = usePokemonPagination(filteredPokemons)
     return (
       <>
         <FilterTypes pokemonTypes={pokemonTypes} setPokemonTypes={setPokemonTypes}/>
-        <FilterSearch setSearch={ setSearch }/>
-        <List>
-          <ElementList pokemons={ paginatedPokemons } />
+        {/* <FilterSearch setSearch={ setSearch }/> */}
+        {!isLoading && <List>
+          <ElementList pokemons={ pokemons } />
         </List>
-        <FilterPage totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        }
+        {/* <FilterPage totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/> */}
       </>
     );
   };
