@@ -7,10 +7,10 @@ import FilterTypes from "./Filter/FilterTypes"
 import FilterSearch from "./Filter/FilterSearch"
 import pokemons from "/public/data/pokemons.json"
 import FilterPage from "./Filter/FilterPage";
-//import { usePokemons } from "./hooks/usePokemons";
+import { usePokemons } from "./hooks/usePokemons";
 
 const App = () => {
-    //const pokemons1 = usePokemons();
+    const pokemons1 = usePokemons();
     const [pokemonTypes, setPokemonTypes] = usePokemonTypes (
       [
         {"type": "Eléctrico", "isChecked": true},

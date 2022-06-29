@@ -4,6 +4,15 @@ export const usePokemons = () => {
     const [pokemons, setPokemons] = useState([]);
     const POKEMONS_API = "https://pokeapi.co/api/v2/pokemon"
 
+    const getPokemon = async (pokemon) => {
+        const request = await fetch(pokemon.url);
+        const result = await request.json();
+        let types = result.types.map((type) => {
+            return type.type.name
+        })
+        return Promise.resolve({ "id": pokemon.id, "name": pokemon.name, "types": types.join(',') });
+    };
+
     useEffect(() => {
         const controller = new AbortController();
     
@@ -13,17 +22,13 @@ export const usePokemons = () => {
             const result = await request.json();
             let pokemons = [];
             if(request.ok) {
-                pokemons = result.results.map((pokemon, index) => {
-                    const request = await fetch(pokemon.url, { signal: controller.signal });
-                    const result = await request.json();
-                    
-                    return { "id": index+1, "name": pokemon.name, "url": pokemon.url };
+                pokemons = result.results.map( async (pokemon) => {
+                    return await getPokemon(pokemon);
                 })
             }
             //setIsLoading(false);
             //setCountries(countries);
-        console.log(pokemons)
-
+            console.log(pokemons)
         })();
         return () => controller.abort();
       }, [/*search*/]);
