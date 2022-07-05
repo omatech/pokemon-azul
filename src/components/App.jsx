@@ -5,9 +5,9 @@ import { usePokemonNames } from "./hooks/usePokemonNames";
 import { usePokemonPagination } from "./hooks/usePokemonPagination";
 import FilterTypes from "./Filter/FilterTypes"
 import FilterSearch from "./Filter/FilterSearch"
-//import pokemons from "/public/data/pokemons.json"
 import FilterPage from "./Filter/FilterPage";
 import { usePokemons } from "./hooks/usePokemons";
+import PokemonsProvider from "../context/PokemonsProvider";
 
 const App = () => {
     const [isLoading, pokemons] = usePokemons();
@@ -20,15 +20,15 @@ const App = () => {
 
     const [paginatedPokemons, totalPages, currentPage, setCurrentPage] = usePokemonPagination(filteredPokemons)
     return (
-      <>
-        <FilterTypes pokemonTypes={pokemonTypes} setPokemonTypes={setPokemonTypes}/>
-        { <FilterSearch setSearch={ setSearch } search={search}/> }
-        {!isLoading && <List>
-          <ElementList pokemons={ paginatedPokemons } />
-        </List>
-        }
-        { <FilterPage totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/> }
-      </>
+      <PokemonsProvider pokemons={ paginatedPokemons } pokemonTypes={pokemonTypes} setPokemonTypes={setPokemonTypes} setSearch={ setSearch } search={search} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}>
+        <FilterTypes />
+        { <FilterSearch /> }
+          {!isLoading && <List>
+            <ElementList />
+          </List>
+          }
+        { <FilterPage /> }
+      </PokemonsProvider>
     );
   };
 

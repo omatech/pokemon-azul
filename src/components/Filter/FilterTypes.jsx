@@ -1,5 +1,9 @@
+import { useContext } from "react";
+import { PokemonsContext } from "../../context/PokemonsProvider";
 
-const FilterTypes = ({ pokemonTypes, setPokemonTypes}) => {
+const FilterTypes = () => {
+    const { pokemonTypes, setPokemonTypes } = useContext(PokemonsContext);
+
     const onChangeHandler = ({ target }) => {
         setPokemonTypes(state => {
             const newState = structuredClone(state);

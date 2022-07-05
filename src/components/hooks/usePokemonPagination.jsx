@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const usePokemonPagination = (pokemonList) => {
-    const [pokemonsPerPage, setPokemonsPerPage] = useState(5)
+    const [pokemonsPerPage, setPokemonsPerPage] = useState(11)
     const [currentPage, setCurrentPage] = useState(0)
     const totalPages = Math.ceil(pokemonList.length / pokemonsPerPage)
     const firstPokemon = (currentPage * pokemonsPerPage)

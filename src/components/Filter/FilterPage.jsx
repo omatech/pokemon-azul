@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { PokemonsContext } from "../../context/PokemonsProvider";
 
-const FilterPage = ({ totalPages, currentPage, setCurrentPage }) => {
+const FilterPage = () => {
+    const { totalPages, currentPage, setCurrentPage } = useContext(PokemonsContext);
+
     const numPages = [...Array(totalPages).keys()];
     
     return <>
