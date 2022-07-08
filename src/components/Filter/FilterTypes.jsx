@@ -1,18 +1,19 @@
 import { useContext } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 
-const FilterTypes = () => {
-    const { pokemonTypes, setPokemonTypes } = useContext(PokemonsContext);
+const FilterTypes = ({dispatch, pokemonTypes}) => {
+    //const { pokemonTypes } = useContext(PokemonsContext);
 
     const onChangeHandler = ({ target }) => {
-        setPokemonTypes(state => {
-            const newState = structuredClone(state);
-            const pokemonType = newState.find(({ type }) => type === target.name);
-            pokemonType.isChecked = target.checked;
-            return newState;
-        }); 
+        dispatch({
+            type: 'SET_VISIBILITY_TYPE',
+            payload: {
+              name: target.name,
+              checked: target.checked
+            }
+          });
     }
-    return pokemonTypes.map(({ type, isChecked }) =>
+    return pokemonTypes && pokemonTypes.map(({ type, isChecked }) =>
         <label key={type}>
             <input
                 checked={ isChecked }

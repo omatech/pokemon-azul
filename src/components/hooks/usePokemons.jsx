@@ -29,7 +29,7 @@ export const usePokemons = (curentPage, offset) => {
             }
             setIsLoading(false);
             setPokemons(pokemons);
-        })();
+        })()
         return () => controller.abort();
       }, [/*search*/]);
     

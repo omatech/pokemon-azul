@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useReducer, useEffect,  } from "react";
+import { pokemonVisibility } from '../../reducers/pokemonVisibility';
 
 export const usePokemonTypes = (initialPokemonTypes) => {
     const POKEMON_TYPES_API = 'https://pokeapi.co/api/v2/type/' 
-    const [pokemonTypes, setPokemonTypes] = useState(initialPokemonTypes);
+    const [pokemonTypes, dispatch] = useReducer(pokemonVisibility, initialPokemonTypes);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -16,10 +17,15 @@ export const usePokemonTypes = (initialPokemonTypes) => {
                     return {'type' : pokemonType.name , 'isChecked' : true};
                 });
             }
-            setPokemonTypes(pokemonTypes);
-        })();
+            dispatch({
+                type: 'LOAD_POKEMON_TYPES',
+                payload: {
+                  types: pokemonTypes
+                }
+            });
+        })()
         return () => controller.abort();
       }, []);
     
-    return [pokemonTypes, setPokemonTypes];
+    return [pokemonTypes, dispatch];
 }

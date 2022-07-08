@@ -11,17 +11,21 @@ import PokemonsProvider from "../context/PokemonsProvider";
 
 const App = () => {
     const [isLoading, pokemons] = usePokemons();
-    const [pokemonTypes, setPokemonTypes] = usePokemonTypes ( [] )
+
+    const [pokemonTypes, dispatch] = usePokemonTypes ( [] )
+
     let pokemonsList = pokemons && pokemons.filter((pokemon) => {
       const pokemonTypesChecked = pokemonTypes.filter(pokemonType => pokemonType.isChecked).map(pokemonType => pokemonType.type)
       return pokemon.types.some((type) => pokemonTypesChecked.includes(type))
-    });
+    })
+
     const [filteredPokemons, setSearch, search] = usePokemonNames(pokemonsList);
 
     const [paginatedPokemons, totalPages, currentPage, setCurrentPage] = usePokemonPagination(filteredPokemons)
+
     return (
-      <PokemonsProvider pokemons={ paginatedPokemons } pokemonTypes={pokemonTypes} setPokemonTypes={setPokemonTypes} setSearch={ setSearch } search={search} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}>
-        <FilterTypes />
+      <PokemonsProvider pokemons={ paginatedPokemons } pokemonTypes={pokemonTypes} setSearch={ setSearch } search={search} totalPages={totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}>
+        <FilterTypes dispatch={dispatch} pokemonTypes={pokemonTypes}/>
         { <FilterSearch /> }
           {!isLoading && <List>
             <ElementList />
