@@ -4,8 +4,8 @@ import ElementImage from "./ElementImage";
 import styles from "./ElementList.module.scss"
 
 const ElementList = () => {
-    const { pokemons } = useContext(PokemonsContext);
-    return pokemons.map(pokemon =>
+    const { state } = useContext(PokemonsContext);
+    return state.filteredPokemons.map(pokemon =>
         <li key={pokemon.id} className={ pokemon.types.some(type => type === "Volador") ? styles.elementListAir : styles.elementListFire }>
             <ElementImage url={pokemon.image} name={pokemon.name}/>
             <span style={{ color:"red" }}>N. {pokemon.id}</span>

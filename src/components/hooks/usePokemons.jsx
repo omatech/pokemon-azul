@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { useState, useEffect } from "react";
+import { PokemonsContext } from "../../context/PokemonsProvider";
 
-export const usePokemons = (curentPage, offset) => {
+export const usePokemons = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [pokemons, setPokemons] = useState([]);
+    const {dispatch} = useContext(PokemonsContext);
     const POKEMONS_API = "https://pokeapi.co/api/v2/pokemon/"
 
     const getPokemon = async (pokemon, controller) => {
@@ -28,10 +30,15 @@ export const usePokemons = (curentPage, offset) => {
                 }));
             }
             setIsLoading(false);
-            setPokemons(pokemons);
+            dispatch({
+                type: 'LOAD_POKEMONS',
+                payload: {
+                    pokemons: pokemons
+                }
+            })
         })()
         return () => controller.abort();
       }, [/*search*/]);
     
-    return [isLoading, pokemons];
+    return [isLoading];
 }

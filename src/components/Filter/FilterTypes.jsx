@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 
-const FilterTypes = ({dispatch, pokemonTypes}) => {
-    //const { pokemonTypes } = useContext(PokemonsContext);
+const FilterTypes = () => {
+    const { state, dispatch } = useContext(PokemonsContext);
 
     const onChangeHandler = ({ target }) => {
         dispatch({
@@ -13,7 +13,8 @@ const FilterTypes = ({dispatch, pokemonTypes}) => {
             }
           });
     }
-    return pokemonTypes && pokemonTypes.map(({ type, isChecked }) =>
+
+    return state.pokemonTypes && state.pokemonTypes.map(({ type, isChecked }) =>
         <label key={type}>
             <input
                 checked={ isChecked }

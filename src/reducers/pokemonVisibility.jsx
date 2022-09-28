@@ -10,14 +10,16 @@ export const pokemonVisibility = (state, { type, payload }) => {
       
       case "LOAD_POKEMON_TYPES":
       {
+        //state.pokemonTypes = payload.types
         return payload.types
       }
-      /*case "LOAD_POKEMON_NAMES":
+
+      case "LOAD_POKEMON_NAMES":
       {
         const newState = structuredClone(state);
         newState.filter(({name}) => name.toLowerCase().includes(payload.search.toLowerCase()))
         return newState
-      }*/
+      }
       default:
         return state;
     }

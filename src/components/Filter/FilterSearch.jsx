@@ -3,16 +3,18 @@ import { useContext } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 
 const FilterSearch = () => {
-    const { setSearch, search } = useContext(PokemonsContext);
-    const ref = useRef();
-    const onClickHandler = () => {
-        setSearch(ref.current.value);
-    }
+    const { dispatch } = useContext(PokemonsContext);
 
-    // useEffect para devolver el foco al input de search una vez se ha hecho la busqueda
-    useEffect(() => {
-        ref.current.focus();
-    }, [search]);
+    const ref = useRef();
+
+    const onClickHandler = () => {        
+        dispatch({
+            type: 'FILTER_NAME',
+            payload: {
+                search: ref.current.value
+            }
+        })
+    }    
 
     return <>
         <input
