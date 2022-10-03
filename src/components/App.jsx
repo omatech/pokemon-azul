@@ -1,7 +1,6 @@
 import List from "./List";
 import ElementList from "./List/ElementList";
 import { usePokemonTypes } from "./hooks/usePokemonTypes";
-import { usePokemonPagination } from "./hooks/usePokemonPagination";
 import FilterTypes from "./Filter/FilterTypes"
 import FilterSearch from "./Filter/FilterSearch"
 import FilterPage from "./Filter/FilterPage";
@@ -17,8 +16,6 @@ const App = () => {
     const [isLoading] = usePokemons()
 
     const [isLoadingTypes] = usePokemonTypes()
-
-    const [paginatedPokemons, totalPages, currentPage, setCurrentPage] = usePokemonPagination(filteredPokemons)
 
     return (
       <>

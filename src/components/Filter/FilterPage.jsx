@@ -3,12 +3,9 @@ import { useContext } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 
 const FilterPage = () => {
-    const { dispatch } = useContext(PokemonsContext);
+    const { dispatch, state } = useContext(PokemonsContext);
+    const numPages = [...Array(state.totalPages).keys()];
 
-    const numPages = [...Array(totalPages).keys()];
-/**
- * @TODO acabar de arreglar la pagination, abajo pasarle bien los parametros al onclickhandler
- */
     const onClickHandler = (currentPage) => {        
         dispatch({
             type: 'UPDATE_PAGINATION',
@@ -23,15 +20,15 @@ const FilterPage = () => {
             type="button"
             name="<<"
             value="<<"
-            onClick={ onClickHandler(0) }
-            disabled = {currentPage<=0}
+            onClick={ ()=>onClickHandler(1) }
+            disabled = {state.currentPage<=1}
         />
          <input 
             type="button"
             name="<"
             value="<"
-            onClick={onClickHandler(currentPage-1)}
-            disabled = {currentPage<=0}
+            onClick={ ()=>onClickHandler(state.currentPage-1)}
+            disabled = {state.currentPage <= 1}
         />
         { numPages.map(page => 
             <input 
@@ -39,21 +36,22 @@ const FilterPage = () => {
                 type="button"
                 name={page}
                 value={page+1}
-                onClick={({target})=>setCurrentPage(target.value-1)}
+                onClick={({target})=>onClickHandler(target.value)}
+                disabled = {page == state.currentPage-1}
             />) }
         <input 
             type="button"
             name=">"
             value=">"
-            onClick={ ()=>setCurrentPage(currentPage + 1) }
-            disabled = {currentPage >= numPages.length -1}
+            onClick={ ()=>onClickHandler(state.currentPage + 1) }
+            disabled = {state.currentPage >= numPages.length -1}
         />
         <input 
             type="button"
             name=">>"
             value=">>"
-            onClick={ ()=>setCurrentPage(numPages.length-1) }
-            disabled = {currentPage >= numPages.length -1}
+            onClick={ ()=>onClickHandler(numPages.length) }
+            disabled = {state.currentPage >= numPages.length -1}
         />
     </>
 }

@@ -1,6 +1,5 @@
 import { useReducer, useEffect, useContext, useState,  } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
-import { pokemonVisibility } from '../../reducers/pokemonVisibility';
 import { stateReducer } from "../../reducers/stateReducer";
 
 export const usePokemonTypes = () => {

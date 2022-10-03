@@ -14,6 +14,13 @@ export const stateReducer = (state, { type, payload }) => {
                 const newState = structuredClone(state);
                 newState.pokemons = payload.pokemons;
                 newState.filteredPokemons = payload.pokemons;
+                //newState.totalPages = Math.ceil(payload.countPokemons / state.pokemonsPerPage)
+                newState.totalPages = 
+                    (payload.countPokemons % state.pokemonsPerPage) !== 0 
+                        ? Math.floor(payload.countPokemons / state.pokemonsPerPage) 
+                        : Math.ceil(payload.countPokemons / state.pokemonsPerPage)
+
+                newState.countPokemons = payload.countPokemons
                 return newState
             }
 
@@ -44,10 +51,16 @@ export const stateReducer = (state, { type, payload }) => {
         case "UPDATE_PAGINATION":
             {
                 const newState = structuredClone(state)
-                newState.totalPages = Math.ceil(newState.pokemons.length / newState.pokemonsPerPage)
+                //newState.totalPages = (newState.countPokemons % newState.pokemonsPerPage) < newState.pokemonsPerPage ? Math.floor(newState.countPokemons / newState.pokemonsPerPage) : Math.ceil(newState.countPokemons / newState.pokemonsPerPage)
+                //console.log("a", (newState.countPokemons % newState.pokemonsPerPage), newState)
+                //console.log(Math.floor(newState.countPokemons / newState.pokemonsPerPage));
                 const firstPokemon = (newState.currentPage * newState.pokemonsPerPage)
                 const lastPokemon = firstPokemon + newState.pokemonsPerPage
+                newState.currentPage = payload.currentPage
+                newState.offset = newState.currentPage == 1 ? 0 : (newState.pokemonsPerPage * newState.currentPage + 1)
                 newState.filteredPokemons = newState.pokemons.slice(firstPokemon, lastPokemon)
+
+                //console.log(payload.currentPage, newState.offset, newState.currentPage, newState.totalPages)
 
                 return newState
             }
