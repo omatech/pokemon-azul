@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+/* import { useState } from "react";
 
 export const usePokemonPagination = (pokemonList) => {
     const [pokemonsPerPage, setPokemonsPerPage] = useState(11)
@@ -9,4 +9,4 @@ export const usePokemonPagination = (pokemonList) => {
     const pokemonPagination = pokemonList.slice(firstPokemon, lastPokemon)
   
     return [pokemonPagination, totalPages, currentPage, setCurrentPage];
-}*/
+} */

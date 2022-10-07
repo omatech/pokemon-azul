@@ -13,12 +13,14 @@ const PokemonsProvider = ({ children }) => {
     totalPages: 0,
     pokemonsPerPage: 10,
     offset: 0,
-    countPokemons: 0
+    countPokemons: 0,
   });
-  
-  return <PokemonsContext.Provider value={{ state, dispatch }}>
-    { children }
-  </PokemonsContext.Provider>
-}
+
+  return (
+    <PokemonsContext.Provider value={{ state, dispatch }}>
+      {children}
+    </PokemonsContext.Provider>
+  );
+};
 
 export default PokemonsProvider;

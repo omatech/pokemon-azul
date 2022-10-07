@@ -1,4 +1,4 @@
-/*import { useContext, useState } from "react";
+/* import { useContext, useState } from "react";
 import { PokemonsContext } from "../../context/PokemonsProvider";
 
 export const usePokemonNames = () => {
@@ -13,4 +13,4 @@ export const usePokemonNames = () => {
             search: search
         }
     })
-}*/
+} */

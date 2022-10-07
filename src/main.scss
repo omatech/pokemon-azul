@@ -2,40 +2,37 @@
 
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif;  -webkit-font-smoothing: antialiased;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
-ul{
-  li{
-    display:flex;
-    flex-flow:row wrap;
+ul {
+  li {
+    display: flex;
+    flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
-    img{
+    img {
       max-width: 46px;
     }
-    > *{
+    > * {
       font-size: 16px;
-      &:not(:first-child){
-        margin-left:36px;
+      &:not(:first-child) {
+        margin-left: 36px;
       }
-      &.name{
+      &.name {
         font-weight: bold;
         min-width: 150px;
       }
-      &.number{
+      &.number {
         min-width: 100px;
       }
     }
   }
 }
-
-
-
-
-
