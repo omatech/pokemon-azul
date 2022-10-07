@@ -8,6 +8,7 @@ import FilterPage from './Filter/FilterPage';
 import { usePokemons } from './hooks/usePokemons';
 import PokemonsProvider from '../context/PokemonsProvider';
 import Header from './Header';
+import DetailsModal from './DetailsModal';
 
 const Contexted = Component => props =>
   (
@@ -48,6 +49,7 @@ const App = () => {
         </List>
       )}
       {<FilterPage />}
+      <DetailsModal />
     </>
   );
 };

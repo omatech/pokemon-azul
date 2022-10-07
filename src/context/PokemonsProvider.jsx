@@ -14,6 +14,8 @@ const PokemonsProvider = ({ children }) => {
     pokemonsPerPage: 10,
     offset: 0,
     countPokemons: 0,
+    showModal: false,
+    pokemonModal: {},
   });
 
   return (

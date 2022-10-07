@@ -5,7 +5,19 @@ import styles from './ElementList.module.scss';
 
 const ElementList = () => {
   useEffect(() => console.log('<ElementList>'));
-  const { state } = useContext(PokemonsContext);
+  const { state, dispatch } = useContext(PokemonsContext);
+
+  const onClickHandler = (pokemon) => {
+    console.log(pokemon)
+    dispatch({
+      type: 'SHOW_DETAILS',
+      payload: {
+        show: true,
+        pokemon: pokemon,
+      },
+    });
+  };
+
   return state.filteredPokemons.map(pokemon => (
     <li
       key={pokemon.id}
@@ -19,6 +31,12 @@ const ElementList = () => {
       <span style={{ color: 'red' }}>N. {pokemon.id}</span>
       <span className='name'>{pokemon.name}</span>
       <span className='type'>{pokemon.types.join(', ')}</span>
+      <input
+        type='button'
+        name='+'
+        value='+'
+        onClick={() => onClickHandler(pokemon)}
+      />
     </li>
   ));
 };

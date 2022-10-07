@@ -72,6 +72,13 @@ export const stateReducer = (state, { type, payload }) => {
       return newState;
     }
 
+    case 'SHOW_DETAILS': {
+      const newState = structuredClone(state);
+      newState.showModal = payload.show;
+      newState.pokemonModal = payload.pokemon;
+      return newState;
+    }
+
     default:
       return state;
   }
